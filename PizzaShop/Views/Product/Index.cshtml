@@ -40,8 +40,20 @@
                         @Html.ActionLink(product.Price + "€", "AddProduct", "Cart", new { ProductID = product.ID,
                             Name = product.Name, Quantity = 1, Price = product.Price, Tax = category.Tax}, new { @onclick = "alert('demo');" })
 
+                        <div id="@(product.ID)" class="btn btn-primary">
+                            DIV TEST
+                        </div>
+
                         <script type="text/javascript">
-                                console.log($)
+                            $("#@product.ID")
+                                .click(function (event) {
+                                    console.log("clicked")
+                                    var productId = $(event.currentTarget).attr('id')
+                                    var quantity = $("#" + "quantity" + productId)
+                                    
+                                    console.log(quantity)
+                                    
+                                })
                         </script>
 
                     </div>
