@@ -51,8 +51,16 @@
                                     var productId = $(event.currentTarget).attr('id')
                                     var quantity = $(`#quantity${productId} option:selected`).text()
                                     
-                                    console.log(quantity)
+                                    var data = {
+                                        productId: productId,
+                                        quantity: quantity
+                                    }
+
+                                    console.log(data)
                                     
+                                    $.post("/Cart/AddProduct", data, function (result) {
+                                         console.log(result)
+                                    })
                                 })
                         </script>
 
