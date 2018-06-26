@@ -1,0 +1,62 @@
+﻿@model IEnumerable<PizzaShop.Models.Category>
+@{
+    ViewBag.Title = "Index";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <h2>Index</h2>
+    <div class="container">
+
+        @foreach (var category in Model)
+        {
+        <h3>@category.Name</h3>
+        <div class="panel-group">
+            @foreach (var product in category.Products)
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse@(product.ID)">@product.Name</a>
+                        </h4>
+                        @if (category.Name.Equals("Pizza"))
+                        {
+                            <label>Medium
+                                <input type="radio" style="float: right" name="size" checked="checked"/>
+                            </label>
+                            <label>Large
+                                <input type="radio" style="float: right" name="size"/>
+                            </label>
+                        }
+                        <select name="quantity@(product.ID)">
+                            @for(int i = 1; i <= 10; i++)
+                            {
+                                <option value="option@(i)">@i</option>
+                            }
+                        </select>
+                        @*<input type="submit" value="@product.Price €" class="btn btn-default" style="float: right" />*@
+                        @Html.ActionLink(product.Price + "€", "AddProduct", "Cart", new { ProductID = product.ID,
+                            Name = product.Name, Quantity = 1, Price = product.Price, Tax = category.Tax}, new { @onclick = "alert('demo');" })
+                    </div>
+                    @if (category.Name.Equals("Pizza"))
+                    {
+                        <div id="collapse@(product.ID)" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <p>Toppings:</p>
+                                @foreach (var extra in ViewBag.Extras)
+                                {
+                                    <div class="checkbox-inline">
+                                        <label>@Html.CheckBox("extra", new { htmlAttributes = new { @onclick = "" } }) @extra.Name (+@extra.Price €)</label>
+                                    </div>
+                                }
+                                <input type="submit" value="produkt + checked extras" class="btn btn-default" style="float: right" />
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+        }
+    </div>
+}

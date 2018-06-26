@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="72a72e661b9b46598562f4a77ce17803" Name="Diagram1">
+        <EntityTypeShape EntityType="PizzaShopModel.Administrator" Width="1.5" PointX="5.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaShopModel.Allergen" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaShopModel.Category" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaShopModel.Customer" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaShopModel.Order" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaShopModel.OrderHasProduct" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaShopModel.Product" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaShopModel.ProductHasAllergen" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PizzaShopModel.Status" Width="1.5" PointX="0.75" PointY="13.875" IsExpanded="true" />
+        <AssociationConnector Association="PizzaShopModel.FK_ProductHasAllergen_Allergen" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaShopModel.FK_Product_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaShopModel.FK_Order_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaShopModel.FK_Order_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaShopModel.FK_OrderHasProduct_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaShopModel.FK_OrderHasProduct_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="PizzaShopModel.FK_ProductHasAllergen_Product" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
