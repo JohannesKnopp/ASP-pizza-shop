@@ -11,6 +11,7 @@ namespace PizzaShop.Models
     {
         public CartViewModel() { }
 
+        public int UniqueID { get; set; }
         public int ProductID { get; set; }
         public string Name { get; set; }
         public int Quantity { get; set; }

@@ -30,8 +30,11 @@ namespace PizzaShop.Controllers
                 toppings = db.Products.Where(p => extras.Contains(p.ID)).ToList();
             }
 
+            var cart = Session["cart"] as List<CartViewModel>;
+            var uniqueId = Convert.ToInt32(Session["cartNextID"]);
             var productVM = new CartViewModel
             {
+                UniqueID = uniqueId,
                 ProductID = product.ID,
                 Name = product.Name,
                 Price = product.Price,
@@ -39,7 +42,8 @@ namespace PizzaShop.Controllers
                 Tax = product.Category.Tax,
                 Toppings = toppings
             };
-            var cart = Session["cart"] as List<CartViewModel>;
+
+            Session["cartNextID"] = uniqueId + 1;
             cart.Add(productVM);
             Session["cart"] = cart;
 
@@ -47,21 +51,23 @@ namespace PizzaShop.Controllers
         }
 
         [HttpPost]
-        public ActionResult RemoveProduct()
+        public ActionResult RemoveFromCart(int uniqueId)
         {
+            var cart = Session["cart"] as List<CartViewModel>;
+            var productToRemove = cart.SingleOrDefault(u => u.UniqueID == uniqueId);
+            cart.Remove(productToRemove);
+            Session["cart"] = cart;
+
+            ViewBag.TotalPrice = cart.Sum(p => p.FullPrice);
+
             return null;
         }
 
         public ActionResult CartSummary()
         {
             var cart = Session["cart"] as List<CartViewModel>;
+            ViewBag.TotalPrice = cart.Sum(p => p.FullPrice);
             return View(cart);
-        }
-
-        public ActionResult PartialCartSummary()
-        {
-            var cart = Session["cart"] as List<CartViewModel>;
-            return PartialView(cart);
         }
     }
 }

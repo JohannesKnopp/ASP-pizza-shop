@@ -24,6 +24,7 @@ namespace PizzaShop
             if (Context != null && Context.Session != null && Session["cart"] == null)
             {
                 Session["cart"] = new List<CartViewModel>();
+                Session["cartNextID"] = 1;
             }
         }
     }

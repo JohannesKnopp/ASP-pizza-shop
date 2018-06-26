@@ -4,35 +4,72 @@
     ViewBag.Title = "Summary";
 }
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th></th>
-    </tr>
+@Scripts.Render("~/bundles/jquery")
 
-    @foreach (var item in Model)
+@using (Html.BeginForm(FormMethod.Post))
+{
+    if (Model.Count() > 0)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FullPrice)
-            </td>
-            <td>
-            </td>
-        </tr>
-    }
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th></th>
+            </tr>
 
-</table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullPrice) €
+                    </td>
+                    <td>
+                        <a id="@(item.UniqueID)">Entfernen</a>
+                        <script type="text/javascript">
+                            $("#@(item.UniqueID)")
+                                .click(function (event) {
+
+                                    var uid = $(event.currentTarget).attr('id')
+                                    var data = {
+                                        uniqueId: uid
+                                    }
+
+                                    $.post("/Cart/RemoveFromCart", data, function (result) {
+                                        console.log(result)
+                                        window.location.reload()
+                                    })
+                                })
+                        </script>
+                    </td>
+                </tr>
+            }
+        </table>
+        <h3>Gesamtpreis: @ViewBag.TotalPrice €</h3>
+    }
+    else
+    {
+        <h3>Dein Warenkorb ist noch leer!</h3>
+    }
+    <div>
+        <button type="button" onclick="window.location.href='/Product'" class="btn btn-primary" data-toggle="popover" title="Weitershoppen">
+            Weitershoppen!
+        </button>
+
+        <button style="float: right" type="button" onclick="window.location.href='/Order/Pay'" class="btn btn-primary" data-toggle="popover" title="Zur Kassa">
+            Zur Kassa!
+        </button>
+    </div>
+}
