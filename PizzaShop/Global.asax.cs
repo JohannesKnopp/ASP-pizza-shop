@@ -16,12 +16,12 @@ namespace PizzaShop
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles); 
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
         public void Application_PreRequestHandlerExecute(Object source, EventArgs e)
         {
-            if (Context != null && Context.Session != null)
+            if (Context != null && Context.Session != null && Session["cart"] == null)
             {
                 Session["cart"] = new List<CartViewModel>();
             }

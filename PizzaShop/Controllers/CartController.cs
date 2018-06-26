@@ -39,7 +39,6 @@ namespace PizzaShop.Controllers
                 Tax = product.Category.Tax,
                 Toppings = toppings
             };
-
             var cart = Session["cart"] as List<CartViewModel>;
             cart.Add(productVM);
             Session["cart"] = cart;

@@ -4,11 +4,6 @@
     ViewBag.Title = "Summary";
 }
 
-@foreach (var p in Model)
-{
-    ViewBag.OrderPrice += p.getFullPrice();
-}
-
 <table class="table">
     <tr>
         <th>
@@ -33,7 +28,7 @@
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.getFullPrice())
+                @Html.DisplayFor(modelItem => item.FullPrice)
             </td>
             <td>
             </td>

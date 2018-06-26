@@ -19,14 +19,17 @@ namespace PizzaShop.Models
 
         public virtual ICollection<Product> Toppings { get; set; }
 
-        public decimal getFullPrice()
+        public decimal FullPrice
         {
-            decimal priceToppings = 0;
-            foreach(Product p in Toppings)
+            get
             {
-                priceToppings += p.Price;
+                decimal priceToppings = 0;
+                foreach (Product p in Toppings)
+                {
+                    priceToppings += p.Price;
+                }
+                return (Price + priceToppings) * Quantity;
             }
-            return (Price + priceToppings) * Quantity;
         }
     }
 
