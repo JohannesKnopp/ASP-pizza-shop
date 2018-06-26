@@ -26,6 +26,12 @@ namespace PizzaShop
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/toast").Include(
+                    "~/Scripts/jquery.toast.js"));
+
+            bundles.Add(new StyleBundle("~/Content/toast").Include(
+                "~/Content/jquery.toast.css"));
         }
     }
 }

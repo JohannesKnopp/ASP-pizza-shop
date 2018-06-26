@@ -67,6 +67,11 @@ namespace PizzaShop.Controllers
         {
             var cart = Session["cart"] as List<CartViewModel>;
             ViewBag.TotalPrice = cart.Sum(p => p.FullPrice);
+            ViewBag.ErrorMessage = "";
+            if(ViewBag.TotalPrice < 12)
+            {
+                ViewBag.ErrorMessage = "(Mindestbestellwert von 12,00€ nicht erreicht)";
+            }
             return View(cart);
         }
     }

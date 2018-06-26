@@ -3,6 +3,8 @@
     ViewBag.Title = "Index";
 }
 @Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/toast")
+@Styles.Render("~/Content/toast")
 
 @using (Html.BeginForm())
 {
@@ -23,7 +25,7 @@
                         </h4>
                         @if (category.Name.Equals("Pizza"))
                         {
-                            <label>Medium
+                            <label >Medium
                                 <input type="radio" style="float: right" name="size@(product.ID)" checked="checked"/>
                             </label>
                             <label>Large
@@ -61,8 +63,9 @@
                                         extras: extras
                                     }
 
-
-                                    $.post("/Cart/AddProduct", data, function (result){})
+                                    $.post("/Cart/AddProduct", data, function (result){
+                                        $.toast('Test Toast')
+                                    })
                                 })
                         </script>
 

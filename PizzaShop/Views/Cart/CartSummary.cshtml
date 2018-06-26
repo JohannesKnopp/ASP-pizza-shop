@@ -57,7 +57,7 @@
                 </tr>
             }
         </table>
-        <h3>Gesamtpreis: @ViewBag.TotalPrice €</h3>
+        <h3>Gesamtpreis: @ViewBag.TotalPrice € @ViewBag.ErrorMessage</h3>
     }
     else
     {
@@ -68,8 +68,20 @@
             Weitershoppen!
         </button>
 
-        <button style="float: right" type="button" onclick="window.location.href='/Order/Pay'" class="btn btn-primary" data-toggle="popover" title="Zur Kassa">
+        @*
+        <script type="text/javascript">
+            $("#finalizeOrder")
+                .click(function (event) {
+
+                })
+        </script>
+            *@
+
+
+        <button style="float: right" id="finalizeOrder" type="button" onclick="window.location.href='/Order'" class="btn btn-primary" data-toggle="popover" title="Zur Kassa">
             Zur Kassa!
         </button>
+
+
     </div>
 }
