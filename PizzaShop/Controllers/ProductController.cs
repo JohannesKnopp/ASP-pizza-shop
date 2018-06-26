@@ -19,7 +19,6 @@ namespace PizzaShop.Controllers
         {
             var mainProducts = db.Categories.Include("Products").Where(c => c.Name != "Extras").ToList();
             var extras = db.Products.Where(p => p.Category.Name.Equals("Extras")).ToList();
-            ViewBag.Extras = extras;
 
             var memberList = extras.Select(x =>
             {
@@ -33,6 +32,7 @@ namespace PizzaShop.Controllers
             }).ToList();
 
             ViewBag.JsonExtras = JsonConvert.SerializeObject(memberList);
+            ViewBag.Extras = extras;
             return View(mainProducts);
         }
 

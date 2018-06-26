@@ -51,11 +51,19 @@
                                     console.log("clicked")
                                     var productId = $(event.currentTarget).attr('id')
                                     var quantity = $(`#quantity${productId} option:selected`).text()
-
+                                    var x = @(Html.Raw(@ViewBag.JsonExtras));
+                                    var extras = []
+                                    
+                                    x.forEach(function(extra){
+                                        var obj = $(`#extra_${productId}_${extra.ID}`).is(":checked")
+                                        if(obj === true)
+                                            extras.push(extra.ID)
+                                    })
 
                                     var data = {
                                         productId: productId,
-                                        quantity: quantity
+                                        quantity: quantity,
+                                        extras: extras
                                     }
 
                                     console.log(data)
@@ -72,11 +80,11 @@
                         <div id="collapse@(product.ID)" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <p>Toppings:</p>
-                                @foreach (var topping in ViewBag.Extras)
+                                @foreach (var extra in ViewBag.Extras)
                                 {
                                     <div class="checkbox-inline">
-                                        <label for="topping_@(product.ID)_@(topping.ID)">@topping.Name
-                                            <input type="checkbox" id="topping_@(product.ID)_@(topping.ID)" />
+                                        <label for="extra_@(product.ID)_@(extra.ID)">@extra.Name
+                                            <input type="checkbox" id="extra_@(product.ID)_@(extra.ID)" />
                                         </label>
                                     </div>
                                 }

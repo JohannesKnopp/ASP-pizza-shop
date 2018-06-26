@@ -21,10 +21,11 @@ namespace PizzaShop.Controllers
 
 
         [HttpPost]
-        public ActionResult AddProduct(int productId, int quantity)
+        public ActionResult AddProduct(int productId, int quantity, int[] extras)
         {
             Console.WriteLine("id: " + productId);
             Console.WriteLine("quantitz: " + quantity);
+            Console.WriteLine("extras: " + extras.ToString());
             return null;
             //var cart = Session["cart"] as List<CartViewModel>;
             //var sessionProd = cart.Where(p => p.ProductID == id).FirstOrDefault();
