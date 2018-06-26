@@ -67,3 +67,5 @@ D:\LAP\Versuch_2\PizzaShop\PizzaShop\bin\Microsoft.Owin.Security.MicrosoftAccoun
 D:\LAP\Versuch_2\PizzaShop\PizzaShop\obj\Debug\PizzaShop.dll
 D:\LAP\Versuch_2\PizzaShop\PizzaShop\obj\Debug\PizzaShop.pdb
 D:\LAP\Versuch_2\PizzaShop\PizzaShop\obj\Debug\PizzaShop.csprojResolveAssemblyReference.cache
+D:\LAP\Versuch_2\PizzaShop\PizzaShop\bin\Omu.ValueInjecter.dll
+D:\LAP\Versuch_2\PizzaShop\PizzaShop\bin\Omu.ValueInjecter.xml

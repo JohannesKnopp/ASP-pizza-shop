@@ -45,19 +45,21 @@
                         </div>
 
                         <script type="text/javascript">
+                            console.log(@Html.Raw(@ViewBag.JsonExtras))
                             $("#@product.ID")
                                 .click(function (event) {
                                     console.log("clicked")
                                     var productId = $(event.currentTarget).attr('id')
                                     var quantity = $(`#quantity${productId} option:selected`).text()
-                                    
+
+
                                     var data = {
                                         productId: productId,
                                         quantity: quantity
                                     }
 
                                     console.log(data)
-                                    
+
                                     $.post("/Cart/AddProduct", data, function (result) {
                                          console.log(result)
                                     })

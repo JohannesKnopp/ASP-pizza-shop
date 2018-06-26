@@ -1,4 +1,6 @@
-﻿using PizzaShop.Models;
+﻿using Newtonsoft.Json;
+using Omu.ValueInjecter;
+using PizzaShop.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,19 @@ namespace PizzaShop.Controllers
             var mainProducts = db.Categories.Include("Products").Where(c => c.Name != "Extras").ToList();
             var extras = db.Products.Where(p => p.Category.Name.Equals("Extras")).ToList();
             ViewBag.Extras = extras;
+
+            var memberList = extras.Select(x =>
+            {
+                var dto = new ProductDto()
+                {
+                    ID = x.ID,
+                    Name = x.Name,
+                    Price = x.Price
+                };
+                return dto;
+            }).ToList();
+
+            ViewBag.JsonExtras = JsonConvert.SerializeObject(memberList);
             return View(mainProducts);
         }
 
