@@ -24,24 +24,21 @@
                         @if (category.Name.Equals("Pizza"))
                         {
                             <label>Medium
-                                <input type="radio" style="float: right" name="size" checked="checked"/>
+                                <input type="radio" style="float: right" name="size@(product.ID)" checked="checked"/>
                             </label>
                             <label>Large
-                                <input type="radio" style="float: right" name="size"/>
+                                <input type="radio" style="float: right" name="size@(product.ID)"/>
                             </label>
                         }
-                        <select id="quantity@(product.ID)">
+                        <select id="quantity@(product.ID)" class="form-control">
                             @for(int i = 1; i <= 10; i++)
                             {
                                 <option value="option@(i)">@i</option>
                             }
                         </select>
-                        @*<input type="submit" value="@product.Price €" class="btn btn-default" style="float: right" />*@
-                        @Html.ActionLink(product.Price + "€", "AddProduct", "Cart", new { ProductID = product.ID,
-                            Name = product.Name, Quantity = 1, Price = product.Price, Tax = category.Tax}, new { @onclick = "alert('demo');" })
 
-                        <div id="@(product.ID)" class="btn btn-primary">
-                            DIV TEST
+                        <div id="@(product.ID)" class="btn btn-primary pull-right">
+                            Zum Warenkorb hinzufügen
                         </div>
 
                         <script type="text/javascript">
@@ -82,11 +79,9 @@
                                 <p>Toppings:</p>
                                 @foreach (var extra in ViewBag.Extras)
                                 {
-                                    <div class="checkbox-inline">
-                                        <label for="extra_@(product.ID)_@(extra.ID)">@extra.Name
-                                            <input type="checkbox" id="extra_@(product.ID)_@(extra.ID)" />
-                                        </label>
-                                    </div>
+                                    <label class="checkbox-inline" for="extra_@(product.ID)_@(extra.ID)">
+                                        <input type="checkbox" id="extra_@(product.ID)_@(extra.ID)" />@extra.Name
+                                    </label>
                                 }
                             </div>
                         </div>

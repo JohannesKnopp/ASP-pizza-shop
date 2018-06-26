@@ -1,10 +1,10 @@
 ﻿@if (Session["CurrentCustomerID"] != null)
 {
-    using (Html.BeginForm("LogOff", "Customer", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("LogOff", "Customer", FormMethod.Post, new { id = "logoutForm", @class = "navbar-nav" }))
     {
     @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav">
         <li>
             @Html.ActionLink("Hello " + Session["CurrentCustomerName"].ToString() + "!", "Edit", "Customer", routeValues: null, htmlAttributes: new { title = "Profile" })
         </li>
@@ -14,7 +14,7 @@
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav">
         <li>@Html.ActionLink("Register", "Register", "Customer", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         <li>@Html.ActionLink("Log in", "Login", "Customer", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>

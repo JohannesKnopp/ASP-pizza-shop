@@ -23,29 +23,46 @@ namespace PizzaShop.Controllers
         [HttpPost]
         public ActionResult AddProduct(int productId, int quantity, int[] extras)
         {
-            Console.WriteLine("id: " + productId);
-            Console.WriteLine("quantitz: " + quantity);
-            Console.WriteLine("extras: " + extras.ToString());
-            return null;
-            //var cart = Session["cart"] as List<CartViewModel>;
-            //var sessionProd = cart.Where(p => p.ProductID == id).FirstOrDefault();
-            //if(sessionProd == null)
-            //{
-            //    Product dbProd = db.Products.Where(p => p.ID == id).FirstOrDefault();
-            //    var toppings = new ICollection<Product>;
-            //    foreach(int i in toppingID)
-            //    {
 
-            //    }
-            //    CartViewModel product = new { ProductID = id, Name = dbProd.Name, Quantity = quantity, Price = dbProd.Price, Tax = dbProd.Category.Tax, Toppings = )}
-            //    cart.Add();
-            //    Session["cart"] = cart;
-            //}
-            //else
-            //{
-            //    sessionProd.Quantity += product.Quantity;
-            //}
-            //return RedirectToAction("Index", "Customer");
+            var product = db.Products.Find(productId);
+            List<Product> toppings = new List<Product>();
+            if (extras != null) {
+                toppings = db.Products.Where(p => extras.Contains(p.ID)).ToList();
+            }
+
+            var productVM = new CartViewModel
+            {
+                ProductID = product.ID,
+                Name = product.Name,
+                Price = product.Price,
+                Quantity = quantity,
+                Tax = product.Category.Tax,
+                Toppings = toppings
+            };
+
+            var cart = Session["cart"] as List<CartViewModel>;
+            cart.Add(productVM);
+            Session["cart"] = cart;
+
+            return null;
+        }
+
+        [HttpPost]
+        public ActionResult RemoveProduct()
+        {
+            return null;
+        }
+
+        public ActionResult CartSummary()
+        {
+            var cart = Session["cart"] as List<CartViewModel>;
+            return View(cart);
+        }
+
+        public ActionResult PartialCartSummary()
+        {
+            var cart = Session["cart"] as List<CartViewModel>;
+            return PartialView(cart);
         }
     }
 }

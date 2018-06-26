@@ -17,11 +17,16 @@ namespace PizzaShop.Models
         public decimal Price { get; set; }
         public int Tax { get; set; }
 
-        public virtual ICollection<CartViewModel> Toppings { get; set; }
+        public virtual ICollection<Product> Toppings { get; set; }
 
         public decimal getFullPrice()
         {
-            return (Price + Toppings.Count) * Quantity;
+            decimal priceToppings = 0;
+            foreach(Product p in Toppings)
+            {
+                priceToppings += p.Price;
+            }
+            return (Price + priceToppings) * Quantity;
         }
     }
 
