@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Index";
 }
+@Scripts.Render("~/bundles/jquery")
 
 @using (Html.BeginForm())
 {
@@ -38,6 +39,11 @@
                         @*<input type="submit" value="@product.Price €" class="btn btn-default" style="float: right" />*@
                         @Html.ActionLink(product.Price + "€", "AddProduct", "Cart", new { ProductID = product.ID,
                             Name = product.Name, Quantity = 1, Price = product.Price, Tax = category.Tax}, new { @onclick = "alert('demo');" })
+
+                        <script type="text/javascript">
+                                console.log($)
+                        </script>
+
                     </div>
                     @if (category.Name.Equals("Pizza"))
                     {
@@ -60,3 +66,4 @@
         }
     </div>
 }
+
