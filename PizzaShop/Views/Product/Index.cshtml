@@ -19,57 +19,65 @@
             @foreach (var product in category.Products)
             {
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" href="#collapse@(product.ID)">@product.Name</a>
-                        </h4>
-                        @if (category.Name.Equals("Pizza"))
-                        {
-                            <label >Medium
-                                <input type="radio" style="float: right" name="size@(product.ID)" checked="checked"/>
-                            </label>
-                            <label>Large
-                                <input type="radio" style="float: right" name="size@(product.ID)"/>
-                            </label>
-                        }
-                        <select id="quantity@(product.ID)" class="form-control">
-                            @for(int i = 1; i <= 10; i++)
-                            {
-                                <option value="option@(i)">@i</option>
-                            }
-                        </select>
-
-                        <div id="@(product.ID)" class="btn btn-primary pull-right">
-                            Zum Warenkorb hinzufügen
+                    <div class="panel-heading row">
+                        <div class="col-md-2">
+                            <h2 class="panel-title">
+                                <a style="" data-toggle="collapse" href="#collapse@(product.ID)">@product.Name</a>
+                            </h2>
                         </div>
 
-                        <script type="text/javascript">
-                            $("#@product.ID")
-                                .click(function (event) {
-                                    var productId = $(event.currentTarget).attr('id')
-                                    var quantity = $(`#quantity${productId} option:selected`).text()
-                                    var x = @(Html.Raw(@ViewBag.JsonExtras));
-                                    var extras = []
-                                    
-                                    x.forEach(function(extra){
-                                        var obj = $(`#extra_${productId}_${extra.ID}`).is(":checked")
-                                        if(obj === true)
-                                            extras.push(extra.ID)
+                        <div class="col-md-2">
+                            <select id="quantity@(product.ID)" class="form-control">
+                                @for (int i = 1; i <= 10; i++)
+                                {
+                                    <option value="option@(i)">@i</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            @if (category.Name.Equals("Pizza"))
+                            {
+                                <label> Medium
+                                    <input type="radio" style="float: right" name="size@(product.ID)" checked="checked" />
+                                </label>
+                                <label> Large 
+                                    <input type="radio" style="float: right" name="size@(product.ID)" />
+                                </label>
+                            }
+                        </div>
+                        <div class="col-md-3 col-md-offset-1">
+                            <div id="@(product.ID)" class="btn btn-primary pull-right">
+                                Zum Warenkorb hinzufügen
+                            </div>
+                        </div>
+                            <script type="text/javascript">
+                                $("#@product.ID")
+                                    .click(function (event) {
+                                        var productId = $(event.currentTarget).attr('id')
+                                        var quantity = $(`#quantity${productId} option:selected`).text()
+                                        var x = @(Html.Raw(@ViewBag.JsonExtras));
+                                        var extras = []
+
+                                        x.forEach(function(extra){
+                                            var obj = $(`#extra_${productId}_${extra.ID}`).is(":checked")
+                                            if(obj === true)
+                                                extras.push(extra.ID)
+                                        })
+
+                                        var data = {
+                                            productId: productId,
+                                            quantity: quantity,
+                                            extras: extras
+                                        }
+
+                                        $.post("/Cart/AddProduct", data, function (result){
+                                            $.toast('Test Toast')
+                                        })
                                     })
+                            </script>
 
-                                    var data = {
-                                        productId: productId,
-                                        quantity: quantity,
-                                        extras: extras
-                                    }
-
-                                    $.post("/Cart/AddProduct", data, function (result){
-                                        $.toast('Test Toast')
-                                    })
-                                })
-                        </script>
-
-                    </div>
+                        </div>
                     @if (category.Name.Equals("Pizza"))
                     {
                         <div id="collapse@(product.ID)" class="panel-collapse collapse">
