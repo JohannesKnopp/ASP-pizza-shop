@@ -70,13 +70,14 @@
                         <div id="collapse@(product.ID)" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <p>Toppings:</p>
-                                @foreach (var extra in ViewBag.Extras)
+                                @foreach (var topping in ViewBag.Extras)
                                 {
                                     <div class="checkbox-inline">
-                                        <label>@Html.CheckBox("extra", new { htmlAttributes = new { @onclick = "" } }) @extra.Name (+@extra.Price €)</label>
+                                        <label for="topping_@(product.ID)_@(topping.ID)">@topping.Name
+                                            <input type="checkbox" id="topping_@(product.ID)_@(topping.ID)" />
+                                        </label>
                                     </div>
                                 }
-                                <input type="submit" value="produkt + checked extras" class="btn btn-default" style="float: right" />
                             </div>
                         </div>
                     }
