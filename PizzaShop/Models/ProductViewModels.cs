@@ -48,13 +48,16 @@ namespace PizzaShop.Models
         }
         public EditProductViewModel(Product product, List<Category> categories, List<Allergen> allergens)
         {
-            this.ID = product.ID;
-            this.Name = product.Name;
-            this.Price = product.Price;
-            this.IsInSortiment = product.IsInSortiment;
-            this.Allergens = allergens;
-            this.SelectedCategoryID = product.CategoryID;
-            this._categories = categories;
+            if (product.Price >= 0)
+            {
+                this.ID = product.ID;
+                this.Name = product.Name;
+                this.Price = product.Price;
+                this.IsInSortiment = product.IsInSortiment;
+                this.Allergens = allergens;
+                this.SelectedCategoryID = product.CategoryID;
+                this._categories = categories;
+            }
         }
 
         public int ID { get; set; }
@@ -62,8 +65,8 @@ namespace PizzaShop.Models
         [Display(Name ="Name")]
         public string Name { get; set; }
         [Required]
-        [DataType(DataType.Currency)]
         [Display(Name = "Preis")]
+        [Range(0, 5000, ErrorMessage ="Preis zwischen 0 und 5000")]
         public decimal Price { get; set; }
         [Required]
         [Display(Name = "Ist im Sortiment?")]

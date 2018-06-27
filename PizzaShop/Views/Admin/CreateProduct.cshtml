@@ -56,13 +56,13 @@
             <div class="col-md-10">
                 @foreach (var a in Model.Allergens)
                 {
-                    <div class="checkbox">
-                        @Html.Label(a.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                        @Html.CheckBox("allergen" + a.ID.ToString())
-                    </div>
+                    <label class="checkbox-inline" for="allergen@(a.ID)">
+                        <input type="checkbox" id="allergen@(a.ID)" />@a.Abbreviation
+                    </label>
                 }
             </div>
         </div>
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -73,5 +73,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "ProductsList")
+    @Html.ActionLink("Back to List", "Index")
 </div>

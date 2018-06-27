@@ -1,6 +1,6 @@
 ﻿@if (Session["CurrentCustomerID"] != null)
 {
-    using (Html.BeginForm("Ausloggen", "Customer", FormMethod.Post, new { id = "logoutForm", @class = "navbar-nav" }))
+    using (Html.BeginForm("LogOff", "Customer", FormMethod.Post, new { id = "logoutForm", @class = "navbar-nav" }))
     {
     @Html.AntiForgeryToken()
 
@@ -8,7 +8,7 @@
         <li>
             @Html.ActionLink("Hallo " + Session["CurrentCustomerName"].ToString() + "!", "Edit", "Customer", routeValues: null, htmlAttributes: new { title = "Profile" })
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Ausloggen</a></li>
     </ul>
     }
 }

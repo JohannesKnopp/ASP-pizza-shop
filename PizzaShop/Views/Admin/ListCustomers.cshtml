@@ -1,0 +1,64 @@
+﻿@model IEnumerable<PizzaShop.Models.Customer>
+
+@{
+    ViewBag.Title = "Customerliste";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@Scripts.Render("~/bundles/jquery")
+
+<h2>Customertliste</h2>
+
+<p>
+    @Html.ActionLink("Neuen Customer erstellen", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+        <td>
+            @Html.ActionLink("Bearbeiten", "EditCustomer", new { id=item.ID }) |
+            <a id="@(item.ID)">Löschen</a>
+            <script type="text/javascript">
+                    $("#@(item.ID)")
+                        .click(function (event) {
+                            var check = confirm("Eintrag löschen?")
+                            if (check) {
+                                var id = $(event.currentTarget).attr('id')
+                                var data = {
+                                    id: id
+                                }
+
+                                $.post("/Admin/RemoveCustomer", data, function (result) {
+                                    console.log(result)
+                                    window.location.reload()
+                                })
+                            }
+                        })
+            </script>
+        </td>
+    </tr>
+}
+
+</table>

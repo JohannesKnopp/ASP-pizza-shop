@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+@Scripts.Render("~/bundles/jquery")
+
 <h2>Produktliste</h2>
 
 <p>
@@ -44,7 +46,24 @@
             </td>
             <td>
                 @Html.ActionLink("Bearbeiten", "EditProduct", new { id = item.ID }) |
-                @Html.ActionLink("Löschen", "DeleteProduct", new { id = item.ID })
+                <a id="@(item.ID)">Löschen</a>
+                <script type="text/javascript">
+                    $("#@(item.ID)")
+                        .click(function (event) {
+                            var check = confirm("Eintrag löschen?")
+                            if (check) {
+                                var id = $(event.currentTarget).attr('id')
+                                var data = {
+                                    id: id
+                                }
+
+                                $.post("/Admin/RemoveProduct", data, function (result) {
+                                    console.log(result)
+                                    window.location.reload()
+                                })
+                            }
+                        })
+                </script>
             </td>
         </tr>
     }
