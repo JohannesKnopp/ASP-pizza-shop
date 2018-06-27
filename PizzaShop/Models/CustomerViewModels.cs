@@ -6,12 +6,12 @@ namespace PizzaShop.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Username")]
+        [Display(Name = "Benutzername")]
         public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Passwort")]
         public string Password { get; set; }
 
         /*
@@ -24,56 +24,57 @@ namespace PizzaShop.Models
     {
         public int Id { get; set; }
 
-        [Display(Name = "First Name")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "First name required")]
+        [Display(Name = "Vorname")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Vorname ist verpflichtend")]
         public string Firstname { get; set; }
 
-        [Display(Name = "Last Name")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Last name required")]
+        [Display(Name = "Nachname")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Nachname ist verpflichtend")]
         public string Lastname { get; set; }
 
-        [Display(Name = "Street")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Street required")]
+        [Display(Name = "Straße")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Straße ist verpflichtend")]
         public string Street { get; set; }
 
-        [Display(Name = "Housenumber")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Housenumber required")]
+        [Display(Name = "Hausnummer")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Hausnummer ist verpflichtend")]
         public string Housenumber { get; set; }
 
-        [Display(Name = "City")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "City required")]
+        [Display(Name = "Stadt")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Stadt ist verpflichtend")]
         public string City { get; set; }
 
-        [Display(Name = "Postal Code")]
+        [Display(Name = "Postleitzahl")]
         [DataType(DataType.PostalCode)]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Postal code required")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Postleitzahl ist verpflichtend")]
         public string Zipcode { get; set; }
 
-        [Display(Name = "Phone Number")]
+        [Display(Name = "Telefonnummer")]
         [DataType(DataType.PhoneNumber)]
         [Phone]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Phone number required")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Telefonnummer ist verpflichtend")]
         public string PhoneNumber { get; set; }
 
         [Display(Name = "E-Mail")]
         [DataType(DataType.EmailAddress)]
-        [EmailAddress(ErrorMessage ="Must be valid E-Mail Address")]
+        [EmailAddress(ErrorMessage ="Muss gültige E-Mail Adresse sein")]
         public string EmailAddress { get; set; }
 
         [Required]
-        [Display(Name = "Username")]
+        [Display(Name = "Benutzername")]
+        [RegularExpression("^[a-zA-Z0-9]+")]
         public string Username { get; set; }
 
         [Required]
-        [StringLength(40, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
+        [StringLength(40, ErrorMessage = "Das Passwort muss zwischen 8 und 40 Zeichen sein", MinimumLength = 8)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Passwort")]
         public string Password { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Passwort bestätigen")]
+        [Compare("Password", ErrorMessage = "Passwörter stimmen nicht überein")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -98,47 +99,47 @@ namespace PizzaShop.Models
 
         public int Id { get; set; }
 
-        [Display(Name = "First Name")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "First name required")]
+        [Display(Name = "Vorname")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Vorname ist verpflichtend")]
         public string Firstname { get; set; }
 
-        [Display(Name = "Last Name")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Last name required")]
+        [Display(Name = "Nachname")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Nachname ist verpflichtend")]
         public string Lastname { get; set; }
 
-        [Display(Name = "Street")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Street required")]
+        [Display(Name = "Straße")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Straße ist verpflichtend")]
         public string Street { get; set; }
 
-        [Display(Name = "Housenumber")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Housenumber required")]
+        [Display(Name = "Hausnummer")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Hausnummer ist verpflichtend")]
         public string Housenumber { get; set; }
 
-        [Display(Name = "City")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "City required")]
+        [Display(Name = "Stadt")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Stadt ist verpflichtend")]
         public string City { get; set; }
 
-        [Display(Name = "Postal Code")]
+        [Display(Name = "Postleitzahl")]
         [DataType(DataType.PostalCode)]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Postal code required")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Postleitzahl ist verpflichtend")]
         public string Zipcode { get; set; }
 
-        [Display(Name = "Phone Number")]
+        [Display(Name = "Telefonnummer")]
         [DataType(DataType.PhoneNumber)]
         [Phone]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Phone number required")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Telefonnummer ist verpflichtend")]
         public string PhoneNumber { get; set; }
 
         [Display(Name = "E-Mail")]
         [DataType(DataType.EmailAddress)]
-        [EmailAddress(ErrorMessage ="Must be valid E-Mail Address")]
+        [EmailAddress(ErrorMessage = "Muss gültige E-Mail Adresse sein")]
         public string EmailAddress { get; set; }
 
         public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Enter Password to save changes!")]
+        [Display(Name = "Bestätige Passwort um Änderungen zu speichern")]
         public string ConfirmationPassword { get; set; }
     }
 
@@ -146,19 +147,19 @@ namespace PizzaShop.Models
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Old Password")]
+        [Display(Name = "Altes Passwort")]
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(40, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
+        [StringLength(40, ErrorMessage = "Das Passwort muss zwischen 8 und 40 Zeichen sein", MinimumLength = 8)]
         [DataType(DataType.Password)]
-        [Display(Name = "New Password")]
+        [Display(Name = "Neues Passwort")]
         public string NewPassword { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm New Password")]
-        [Compare("NewPassword", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Bestätige neues Passwort")]
+        [Compare("NewPassword", ErrorMessage = "Die Passwörter stimmen nicht überein")]
         public string ConfirmNewPassword { get; set; }
     }
 }

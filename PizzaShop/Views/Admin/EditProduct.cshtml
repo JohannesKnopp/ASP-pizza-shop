@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "EditProduct";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h2>EditProduct</h2>
@@ -55,10 +56,9 @@
                 <div class="col-md-10">
                     @foreach (var a in Model.Allergens)
                     {
-                        <div class="checkbox">
-                            @Html.Label(a.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                            @Html.CheckBox(a.ID.ToString())
-                        </div>
+                        <label class="checkbox-inline" for="allergen_@(a.ID)">
+                             <input type="checkbox" id="allergen_@(a.ID)" />@a.Abbreviation
+                        </label>
                     }
                 </div>
             </div>
@@ -72,5 +72,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "ProductsList")
+    @Html.ActionLink("Back to List", "Index")
 </div>

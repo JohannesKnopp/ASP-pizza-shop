@@ -1,0 +1,17 @@
+﻿@if (Session["Admin"] != null)
+{
+    using (Html.BeginForm("LogOff", "Admin", FormMethod.Post, new { id = "logoutForm", @class = "navbar-nav" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav">
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Ausloggen</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Login", "Login", "Admin", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

@@ -11,11 +11,15 @@ namespace PizzaShop.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Administrator
     {
         public int ID { get; set; }
+        [Display(Name ="Administrator")]
         public string Username { get; set; }
+        [Display(Name ="Passwort")]
+        [DataType(DataType.Password)]
         public string PasswordHash { get; set; }
     }
 }

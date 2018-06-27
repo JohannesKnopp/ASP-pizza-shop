@@ -14,9 +14,12 @@ namespace PizzaShop.Models
         public int UniqueID { get; set; }
         public int ProductID { get; set; }
         public string Name { get; set; }
+        [Display(Name="Anzahl")]
         public int Quantity { get; set; }
+        [Display(Name = "Preis")]
         public decimal Price { get; set; }
         public int Tax { get; set; }
+        public bool IsLarge { get; set; }
 
         public virtual ICollection<Product> Toppings { get; set; }
 
@@ -60,14 +63,13 @@ namespace PizzaShop.Models
         public string Name { get; set; }
         [Required]
         [DataType(DataType.Currency)]
-        [Display(Name = "Price")]
+        [Display(Name = "Preis")]
         public decimal Price { get; set; }
         [Required]
-        [Display(Name = "Is in Sortiment?")]
+        [Display(Name = "Ist im Sortiment?")]
         public bool IsInSortiment { get; set; }
-        [Display(Name = "Allergens")]
         public virtual ICollection<ProductHasAllergen> ProductHasAllergens { get; set; }
-
+        [Display(Name = "Allergene")]
         public List<Allergen> Allergens;
 
         private List<Category> _categories;

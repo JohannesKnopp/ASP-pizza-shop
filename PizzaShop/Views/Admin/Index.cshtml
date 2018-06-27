@@ -1,8 +1,52 @@
-﻿
+﻿@model IEnumerable<PizzaShop.Models.Product>
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Produktliste";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Produktliste</h2>
 
-Login successful
+<p>
+    @Html.ActionLink("Neues Produkt erstellen", "CreateProduct")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsInSortiment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price) €
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsInSortiment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Bearbeiten", "EditProduct", new { id = item.ID }) |
+                @Html.ActionLink("Löschen", "DeleteProduct", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

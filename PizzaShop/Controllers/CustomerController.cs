@@ -84,7 +84,7 @@ namespace PizzaShop.Controllers
                         Session["CurrentCustomerName"] = dbCust.Firstname + " " + dbCust.Lastname;
                         Session["CurrentCustomerId"] = dbCust.ID;
                         Session["CurrentCustomerUsername"] = dbCust.Username;
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Product");
                     }
                 }
             }
@@ -131,6 +131,14 @@ namespace PizzaShop.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Edit");
                 }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Ungültiges Passwort");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Ungültige Daten");
             }
             return View("Edit");
         }
@@ -178,7 +186,7 @@ namespace PizzaShop.Controllers
 
         private Customer getCustomerByUsername(string username)
         {
-            var customer = db.Customers.Where(c => c.Username.Equals(username)).FirstOrDefault();
+            var customer = db.Customers.Where(c => c.Username.Equals(username, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
             return customer;
         }
 

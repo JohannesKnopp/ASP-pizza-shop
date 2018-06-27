@@ -1,12 +1,12 @@
 ﻿@if (Session["CurrentCustomerID"] != null)
 {
-    using (Html.BeginForm("LogOff", "Customer", FormMethod.Post, new { id = "logoutForm", @class = "navbar-nav" }))
+    using (Html.BeginForm("Ausloggen", "Customer", FormMethod.Post, new { id = "logoutForm", @class = "navbar-nav" }))
     {
     @Html.AntiForgeryToken()
 
     <ul class="nav navbar-nav">
         <li>
-            @Html.ActionLink("Hello " + Session["CurrentCustomerName"].ToString() + "!", "Edit", "Customer", routeValues: null, htmlAttributes: new { title = "Profile" })
+            @Html.ActionLink("Hallo " + Session["CurrentCustomerName"].ToString() + "!", "Edit", "Customer", routeValues: null, htmlAttributes: new { title = "Profile" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>
@@ -15,7 +15,7 @@
 else
 {
     <ul class="nav navbar-nav">
-        <li>@Html.ActionLink("Register", "Register", "Customer", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Customer", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Registrieren", "Register", "Customer", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Login", "Login", "Customer", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }

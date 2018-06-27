@@ -35,16 +35,19 @@
                             </select>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             @if (category.Name.Equals("Pizza"))
                             {
                                 <label> Medium
-                                    <input type="radio" style="float: right" name="size@(product.ID)" checked="checked" />
+                                    <input type="radio" id="size@(product.ID)" style="float: right" name="size@(product.ID)" checked="checked" />
                                 </label>
-                                <label> Large 
+                                <label> Large (+5,00€)
                                     <input type="radio" style="float: right" name="size@(product.ID)" />
                                 </label>
                             }
+                        </div>
+                        <div class="col-md-2">
+                            <h4>@product.Price €</h4>
                         </div>
                         <div class="col-md-3 col-md-offset-1">
                             <div id="@(product.ID)" class="btn btn-primary pull-right">
@@ -57,6 +60,8 @@
                                         var productId = $(event.currentTarget).attr('id')
                                         var quantity = $(`#quantity${productId} option:selected`).text()
                                         var x = @(Html.Raw(@ViewBag.JsonExtras));
+                                        var isLarge = $(`#size@(product.ID)`).is(":checked")
+                                        console.log(isLarge)
                                         var extras = []
 
                                         x.forEach(function(extra){
@@ -68,25 +73,25 @@
                                         var data = {
                                             productId: productId,
                                             quantity: quantity,
-                                            extras: extras
+                                            extras: extras,
+                                            isLarge: isLarge
                                         }
 
-                                        $.post("/Cart/AddProduct", data, function (result){
-                                            $.toast('Test Toast')
+                                        $.post("/Cart/AddProduct", data, function (result){ 
+                                            alert("Produkt erfolgreich hinzugefügt!")
                                         })
                                     })
                             </script>
-
                         </div>
                     @if (category.Name.Equals("Pizza"))
                     {
                         <div id="collapse@(product.ID)" class="panel-collapse collapse">
                             <div class="panel-body">
-                                <p>Toppings:</p>
+                                <p>Extras:</p>
                                 @foreach (var extra in ViewBag.Extras)
                                 {
                                     <label class="checkbox-inline" for="extra_@(product.ID)_@(extra.ID)">
-                                        <input type="checkbox" id="extra_@(product.ID)_@(extra.ID)" />@extra.Name
+                                        <input type="checkbox" id="extra_@(product.ID)_@(extra.ID)" />@extra.Name (@(extra.Price) €) 
                                     </label>
                                 }
                             </div>

@@ -21,7 +21,7 @@ namespace PizzaShop.Controllers
 
 
         [HttpPost]
-        public ActionResult AddProduct(int productId, int quantity, int[] extras)
+        public ActionResult AddProduct(int productId, int quantity, int[] extras, bool isLarge)
         {
 
             var product = db.Products.Find(productId);
@@ -42,6 +42,12 @@ namespace PizzaShop.Controllers
                 Tax = product.Category.Tax,
                 Toppings = toppings
             };
+
+            if (isLarge)
+            {
+                productVM.Price += 5;
+                productVM.Name += " Large";
+            }
 
             Session["cartNextID"] = uniqueId + 1;
             cart.Add(productVM);

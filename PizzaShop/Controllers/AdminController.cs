@@ -15,7 +15,12 @@ namespace PizzaShop.Controllers
         
         public ActionResult Index()
         {
-            return View();
+            if (Session["Admin"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            List<Product> products = db.Products.ToList();
+            return View(products);
         }
 
         [HttpGet]
@@ -48,16 +53,13 @@ namespace PizzaShop.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult ListProducts()
+        public ActionResult LogOff()
         {
-            if (Session["Admin"] == null)
-            {
-                return RedirectToAction("Login");
-            }
-            List<Product> products = db.Products.ToList();
-            return View(products);
+            Session.RemoveAll();
+            Session.Clear();
+            return RedirectToAction("Login", "Admin");
         }
+
 
         [HttpGet]
         public ActionResult EditProduct(int? id)
@@ -68,7 +70,7 @@ namespace PizzaShop.Controllers
             }
             if(id == null)
             {
-                return RedirectToAction("ListProducts");
+                return RedirectToAction("Index");
             }
             Product product = db.Products.Find(id);
             List<Category> categories = db.Categories.ToList();
@@ -90,9 +92,9 @@ namespace PizzaShop.Controllers
                 dbProd.Price = product.Price;
                 dbProd.IsInSortiment = product.IsInSortiment;
                 db.SaveChanges();
-                return RedirectToAction("ListProducts");
+                return RedirectToAction("Index");
             }
-            return View("Edit");
+            return View(product);
         }
 
         [HttpGet]
